@@ -12,3 +12,6 @@ RUN apt-get update
 RUN apt-get install -y curl
 RUN mkdir -p /var/www/html/
 RUN chown -R owner:owner /var/www/
+
+RUN apt-get install -y openssh-server
+RUN service ssh start

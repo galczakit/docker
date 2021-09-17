@@ -39,6 +39,13 @@ RUN sed -i -e 's/www-data/owner/g' /usr/local/etc/php-fpm.d/www.conf
 # run apache as a 'owner'
 RUN echo "memory_limit=2024M" > /usr/local/etc/php/conf.d/memory.ini
 
+#Mailhog
+RUN curl -Lsf 'https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz' | tar -C '/usr/local' -xvzf -
+ENV PATH /usr/local/go/bin:$PATH
+RUN go get github.com/mailhog/mhsendmail
+RUN cp /root/go/bin/mhsendmail /usr/bin/mhsendmail
+RUN echo 'sendmail_path = /usr/bin/mhsendmail --smtp-addr mailhog:1025' > /usr/local/etc/php/php.ini
+
 RUN mkdir /home/owner
 RUN chown owner:owner /home/owner
 
