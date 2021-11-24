@@ -50,7 +50,7 @@ RUN echo "Installing PHP extensions" \
 RUN pecl install imagick \
 	&& docker-php-ext-enable imagick
 
-RUN curl -O https://download.libsodium.org/libsodium/releases/libsodium-1.0.18.tar.gz \
+RUN curl -kO https://download.libsodium.org/libsodium/releases/libsodium-1.0.18.tar.gz \
   && tar xfvz libsodium-1.0.18.tar.gz \
   && cd libsodium-1.0.18 \
   && ./configure \
@@ -85,3 +85,14 @@ RUN chown owner:owner /home/owner
 RUN curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
 RUN php /tmp/composer-setup.php --version=1.10.1 --install-dir=/bin/ --filename=composer
 RUN rm /tmp/composer-setup.php
+
+
+#RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+#RUN apt-get update && apt-get upgrade -y && \
+#    apt-get install -y nodejs \
+#    npm
+#RUN nodejs --version
+#RUN npm --version
+#RUN apt update && apt-get install -y npm
+#RUN npm install -g bower gulp gulp-cli
+##RUN npm install -g npm@3.10.10
