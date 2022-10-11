@@ -1,6 +1,9 @@
 FROM ubuntu
 
-RUN adduser --disabled-password --uid 1000 owner
+ARG UNIX_USER_ARG=1000
+ENV UNIX_USER=${UNIX_USER_ARG}
+
+RUN adduser --disabled-password --uid ${UNIX_USER} owner
 RUN mkdir /home/owner/app
 RUN chown -R owner:owner /home/owner
 
